@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script defer src="index.js"></script>
+    <link href="/style.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="module" src-="/index.js"></script>
+    <title>JS Game</title>
+</head>
+
+<body>
+    <div id="button-container" class="container">
+        <div id="text">Choose a card</div>
+        <div class="card-name" id="card-name-1">NAME 1</div>
+        <div class="card-name" id="card-name-2">NAME 2</div>
+        <div class="card-name" id="card-name-3">NAME 3</div>
+        <div id="card-select" class="btn-grid">
+            <button class="btn" data-card-index="0" data-random-card=""></button>
+            <button class="btn" data-card-index="1" data-random-card=""></button>
+            <button class="btn" data-card-index="2" data-random-card=""></button>
+        </div>
+        <div class="card-text" id="card-text-1">TEXT 1</div>
+        <div class="card-text" id="card-text-2">TEXT 2</div>
+        <div class="card-text" id="card-text-3">TEXT 3</div>
+        <div class="card-desc" id="card-desc-1">
+            <p class="card-desc-text" id="card-desc-text1">test</p>
+        </div>
+        <div class="card-desc" id="card-desc-2">
+            <p class="card-desc-text" id="card-desc-text2">test2</p>
+        </div>
+        <div class="card-desc" id="card-desc-3">
+            <p class="card-desc-text" id="card-desc-text3">test3</p>
+        </div>
+        <button class="choosePlayerBtn" id="player1-btn">player1</button>
+        <button class="choosePlayerBtn" id="player2-btn">player2</button>
+
+        <button id="acceptLobby">Accept</button>
+    </div>
+
+    <div id="game-container" class="container" style="display: none;">
+        <p class="turn-system" class="fade-out-text" id="turn-system">Game Start</p>
+        <p class="confirmAttackMenu" id="confirmAttackMenu" style="display: none;">COMMIT TO ATTACK PHASE?</p>
+        <button class="yesConfirmAttack" id="yesConfirmAttack" style="display: none;">YES</button>
+        <button class="noConfirmAttack" id="noConfirmAttack" style="display: none;">NO</button>
+        <p class="confirmDrawMenu" id="confirmDrawMenu" style="display: none;">COMMIT TO DRAW PHASE?</p>
+        <p class="starter-hand-text" id="starter-hand-text">PICK CARDS IN HAND TO REPLACE AND REDRAW</p>
+        <p class="mainHP" id="mainHP">40</p>
+        <p class="mainPhase" id="mainPhase" style="display: none;">PLAN PHASE</p>
+        <button id="drawCard" class="drawCard" style="display: none;">DRAW</button>
+        <button id="replace-hand-done">DONE</button>
+        <div class="player-board" id="player2-board">
+            <div class="board-spot" id="enemyboard-1" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="enemyboard-2" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="enemyboard-3" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="enemyboard-4" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="enemyboard-5" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="enemyboard-6" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="enemyboard-7" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="enemyboard-8" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="enemyboard-9" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="enemyboard-10" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            
+        </div>
+        <div class="player-board mainboard" id="player1-board">
+            <div class="board-spot" id="mainboard-1" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="mainboard-2" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="mainboard-3" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="mainboard-4" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="mainboard-5" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="mainboard-6" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="mainboard-7" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="mainboard-8" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="mainboard-9" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+            <div class="board-spot" id="mainboard-10" data-card-inplay="null">
+                <div id="card-health-box" style="display: none;">HP</div>
+                <div id="card-attack-box" style="display: none;">ATK</div>
+            </div>
+        </div>
+
+        <div class="main-player-deck" id="main-player-deck">MAIN DECK 40/40</div>
+        <div class="main-player-graveyard" id="main-player-graveyard">graveyard</div>
+
+        <div class="graveyard-ui-menu" id="graveyard-ui-menu" style="display: none;">
+            <ul class="graveyard-ui-menu-cards">
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-1" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-2" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-3" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-4" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-5" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-6" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-7" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-8" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-9" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-10" data-card="">card</li>
+            
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-11" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-12" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-13" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-14" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-15" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-16" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-17" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-18" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-19" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-20" data-card="">card</li>
+            
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-21" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-22" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-23" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-24" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-25" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-26" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-27" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-28" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-29" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-30" data-card="">card</li>
+            
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-31" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-32" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-33" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-34" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-35" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-36" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-37" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-38" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-39" data-card="">card</li>
+                <li class="graveyard-ui-menu-card" id="graveyard-ui-menu-card-40" data-card="">card</li>
+
+                <button class="graveyard-ui-menu-close" id="graveyard-ui-menu-close">EXIT</button>
+            </ul>
+            
+
+            
+        </div>
+
+        <div class="main-player-hand">
+            <div class="main-player-hand-slots" id="player-hand-1" style="display: none;" willReplace="false">
+                <div id="card-cost-box">1</div>
+            </div>
+            <div class="main-player-hand-slots" id="player-hand-2" style="display: none;" willReplace="false">
+                <div id="card-cost-box">2</div>
+            </div>
+            <div class="main-player-hand-slots" id="player-hand-3" style="display: none;" willReplace="false">
+                <div class="card-cost-box">3</div>
+            </div>
+            <div class="main-player-hand-slots" id="player-hand-4" style="display: none;" willReplace="false">
+                <div class="card-cost-box">4</div>
+            </div>
+            <div class="main-player-hand-slots" id="player-hand-5" style="display: none;" willReplace="false">
+                <div class="card-cost-box">5</div>
+            </div>
+            <div class="main-player-hand-slots" id="player-hand-6" style="display: none;" willReplace="false">
+                <div class="card-cost-box">6</div>
+            </div>
+            <div class="main-player-hand-slots" id="player-hand-7" style="display: none;" willReplace="false">
+                <div class="card-cost-box">7</div>
+            </div>
+        </div>
+        <div class="opponent-hand">
+            <div class="opponent-hand-slots" id="opponent-hand-1"></div>
+            <div class="opponent-hand-slots" id="opponent-hand-2"></div>
+            <div class="opponent-hand-slots" id="opponent-hand-3"></div>
+            <div class="opponent-hand-slots" id="opponent-hand-4"></div>
+            <div class="opponent-hand-slots" id="opponent-hand-5"></div>
+            <div class="opponent-hand-slots" id="opponent-hand-6"></div>
+            <div class="opponent-hand-slots" id="opponent-hand-7"></div>
+            </div>
+    </div>
+
+    
+    <div id="card-information-onclick">
+
+    </div>
+
+    <div id="card-desc-text-onclick">
+
+    </div>
+
+    <div id="deck-container">
+        <div id="deck-text">Deck: 0 / 40</div>
+        <ul id="player-deck">
+            <li></li>
+        </ul>
+    </div>
+</body>
+
+</html>

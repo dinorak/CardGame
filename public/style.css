@@ -1,0 +1,572 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: Gotham Rounded;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(7, 7, 7);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px 2px;
+    flex-direction: column;
+    background-color: darkgray;
+}
+
+.btn {
+    font-size: larger;
+    border: none;
+    background-color: transparent;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: rgb(105, 105, 155);
+}
+
+.btn-grid {
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 200px;
+    justify-items: center;
+}
+
+#text {
+    position: absolute;
+    top: 150px;
+    font-size: 70px;
+    text-align: center;
+}
+
+.btn img {
+    width: auto;
+    height: 100px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+#player-deck {
+    padding: 0;
+    margin-top: 20px;
+    list-style-type: none;
+    text-align: center;
+    margin-left: 0; 
+    width: 100%; 
+}
+
+#player-deck li {
+    margin-bottom: 10px;
+    font-size: 20px;
+    line-height: .5;
+    text-align: left;
+}
+#deck-text {
+    padding: 0;
+    margin-top: 20px;
+    list-style-type: none;
+    text-align: left;
+    margin-left: 0; 
+    width: 100%; 
+    font-weight: bold;
+    
+}
+#deck-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 100%;
+    max-width: 1200px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    flex-direction: column;
+    background-color: gray;
+}
+#card-name-1 {
+    position: absolute;
+    margin-bottom: 150px;
+    margin-right: 675px;
+    font-weight: bold;
+    font-size: larger;
+}
+#card-name-2{
+    position: absolute;
+    margin-bottom: 150px;
+    font-weight: bold;
+    font-size: larger;
+}
+#card-name-3{
+    position: absolute;
+    font-weight: bold;
+    font-size: larger;
+    margin-bottom: 150px;
+    margin-left: 675px
+}
+#card-text-1 {
+    position: absolute;
+    padding: 0;
+    margin-top: 150px;
+    margin-right: 675px;
+    margin-left: 0;
+    word-wrap: break-word;
+    
+}
+#card-text-2{
+    position: absolute;
+    padding: 0;
+    margin-top: 150px;
+}
+#card-text-3{
+    padding: 0;
+    margin-left: 675px;
+    margin-top: 150px;
+}
+.card-desc {
+    position: absolute;
+}
+#card-desc-1{
+    
+    margin-top: 300px;
+    margin-right: 670px;
+    
+}
+#card-desc-2{
+    
+    margin-top: 300px;
+}
+#card-desc-3{
+    
+    
+    margin-top: 300px;
+    margin-left: 670px
+}
+#card-desc-text1,
+#card-desc-text2,
+#card-desc-text3 {
+    word-wrap: break-word;
+    text-align: center;
+    width: 200px; /* Set the desired width */
+    min-height: 100px; /* Set a minimum height to ensure it grows downwards */
+    margin: 10px; /* Add some margin around the card-desc elements for spacing */
+    padding: 10px; /* Add padding inside the card-desc elements */
+    position: relative;
+    top: 0; /* Align to the top */
+    border: 1px solid black;
+    position: relative; /* Add this line */
+}
+
+#card-desc-text1::after,
+#card-desc-text2::after,
+#card-desc-text3::after {
+    content: ''; /* Create a pseudo-element */
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 20px; /* Adjust the height of the extension as needed */
+    display: block;
+}
+
+
+/* ... (previous styles) */
+
+/* ... (previous styles) */
+
+#game-container {
+    z-index: 0;
+    display: flex;
+    justify-content: space-around; /* Adjust as needed */
+}
+
+.player-board {
+
+    padding-top: 20px;
+    
+    margin-bottom: 20px;
+    
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    grid-template-rows: repeat(2, 1fr); /* 2 rows */
+    gap: 15px; /* Adjust the space between individual board spots */
+}
+
+#player2-board {
+    padding-top: 100px;
+    margin-top: 500px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    gap: 15px; /* Adjust the space between individual board spots */
+     
+}
+
+#player1-board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    gap: 15px; /* Adjust the space between individual board spots */
+    margin-bottom: 440px; /* Adjust the space between the two rows */
+    padding-bottom: 200px;
+}
+
+.board-spot {
+    width: 120px; /* Adjust the width to fill the column */
+    height: 125px;
+    background-color: gray;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.board-spot:hover {
+    background-color: lightblue; /* Adjust the highlight color as needed */
+}
+
+/* Add this class for the 10 board spots */
+.board-spot.active {
+    width: 100%; /* Adjust the width of the active board spots */
+}
+
+/* Add the necessary styles for the main-player-hand */
+.main-player-hand {
+    z-index: 0;
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    top: 800px; /* Adjust the top position as needed */
+}
+
+#card-cost-box {
+    position: absolute;
+    top: 5px; /* Adjust the top position as needed */
+    left: 5px; /* Adjust the left position as needed */
+    width: 20px;
+    height: 20px;
+    background-color: rgb(42, 204, 245); /* Adjust the color as needed */
+    color: black;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Ensure the box is above the card */
+}
+
+
+.main-player-hand-slots {
+    position: relative;
+    width: 140px;
+    height: 120px;
+    background-color: black;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 0; /* Ensure the default z-index is lower than the card-cost-box */
+}
+
+.main-player-hand-slots img {
+    width: 120px; /* Adjust the width of the active board spots */
+    height: 100px;
+}
+
+.main-player-hand-slots:hover {
+    background-color: lightblue; /* Adjust the highlight color as needed */
+}
+.opponent-hand {
+    z-index: 0;
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    top: 1px; /* Adjust the top position as needed */
+}
+
+.opponent-hand-slots{
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 0; /* Ensure the default z-index is lower than the card-cost-box */
+}
+.opponent-hand-slots:hover {
+    background-color: lightblue; /* Adjust the highlight color as needed */
+}
+
+
+#card-information-onclick {
+    margin-right: 1708px;
+    margin-bottom: 720px;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: blueviolet;
+}
+#card-desc-text-onclick {
+    position: absolute;
+    width: 200px;
+    height: 500px;
+    margin-right: 1708px;
+    background-color: rgb(104, 96, 96);
+    font-size: 17px;
+    overflow: hidden;
+    word-wrap: break-word; /* Add overflow property to enable scrolling if the content exceeds the height */
+    padding: 10px; /* Add padding for better readability */
+    box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+}
+#card-information-onclick,
+#card-desc-text-onclick {
+    display: none;
+}
+#player1-btn {
+    position: absolute;
+    margin-top: 700px;
+    width: 80px;
+    height: 20px;
+    margin-right: 100px;
+}
+#player2-btn {
+    position: absolute;
+    margin-top: 700px;
+    width: 80px;
+    height: 20px;
+    margin-left: 100px;
+}
+#acceptLobby{
+    display: none;
+    position: absolute;
+    margin-top: 850px;
+}
+#main-player-deck{
+    position: absolute;
+    margin-left: 900px;
+    margin-top: 420px;
+    width: 120px;
+    height: 125px;
+    background-color: rgb(24, 18, 43);
+
+    text-align: center;
+    color: white;
+}
+#main-player-graveyard {
+    position: absolute;
+    margin-left: 900px;
+    margin-top: 120px;
+    width: 120px;
+    height: 125px;
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+    color: white;
+    background-image: url(card-images/gravestone-2026737_1280.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.3s; /* Adding smooth transition effect */
+}
+
+#main-player-graveyard:hover {
+    transform: scale(1.1); /* Example: Increase size on hover */
+    /* Add any other hover effects you desire */
+}
+
+#card-health-box{
+    position: absolute;
+    margin-top: 85px;
+    margin-left: -10px;
+    width: 30px;
+    height: 30px;
+    background-color: rgb(76, 121, 34);
+
+    text-align: center;
+    padding-top: 3px;
+    font-size: larger;
+
+}
+#card-attack-box{
+    position: absolute;
+    margin-top: 85px;
+    margin-left: 80px;
+    width: 30px;
+    height: 30px;
+    background-color: rgb(165, 56, 56);
+
+    text-align: center;
+    padding-top: 3px;
+    font-size: larger;
+}
+#graveyard-ui-menu{
+    position: absolute;
+    height: 650px;
+    width: 1000px;
+    background-color: rgb(168, 157, 157);
+    border: 1px solid black;
+    
+}
+.graveyard-ui-menu-cards{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px; /* Adjust as needed */
+    align-items: center;
+    overflow-y: scroll;
+    height: 100%;
+    margin-left: 50px;
+}
+.graveyard-ui-menu-card {
+    width: 120px;
+    height: 100px;
+    background-color: white;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, box-shadow 0.3s; /* Add smooth transition */
+}
+
+.graveyard-ui-menu-card:hover {
+    background-color: lightgray; /* Change to the desired hover color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a box shadow on hover */
+}
+#graveyard-ui-menu-close {
+    position: absolute;
+    margin-right: 1000px;
+    left: -2px;
+    margin-bottom : 625px;
+    
+    background-color: #3498db; /* Button background color */
+    color: #ffffff; /* Button text color */
+    
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add smooth transition on hover */
+
+    /* Optional: Add box shadow for a subtle lift effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#graveyard-ui-menu-close:hover {
+    background-color: #2980b9; /* Change to a slightly darker color on hover */
+}
+#turn-system {
+    position: absolute;
+    margin-bottom: 60px;
+    
+    font-family: 'Arial', sans-serif;
+    font-size: 20px; /* Adjust the font size */
+    color: #3498db;
+    text-align: center;
+    padding: 5px; /* Adjust padding for better size */
+    background-color: #ecf0f1;
+    border-radius: 5px; /* Adjust rounded corners */
+}
+#starter-hand-text {
+    position: absolute;
+    
+    margin-top: 625px;
+    font-family: 'Arial', sans-serif;
+    font-size: 30px; /* Adjust the font size */
+    color: #3498db;
+    text-align: center;
+    padding: 10px; /* Adjust padding for better size */
+    background-color: #ecf0f1;
+    border-radius: 5px; /* Adjust rounded corners */
+}
+#replace-hand-done {
+    position: absolute;
+    height: 50px;
+    width: 100px;
+    margin-right: 900px;
+    margin-top: 600px;
+}
+#turn-system {
+    transition: opacity 3s ease-out 2s;
+}
+.selected-card-highlight {
+    border: 2px solid #ffcc00; /* You can change the color as per your preference */
+    box-shadow: 0 0 10px #ffcc00; /* Add a box shadow for a more pronounced effect */
+    /* Add any other styles for highlighting here */
+}
+#drawCard {
+    position: absolute;
+    height: 50px;
+    width: 100px;
+}
+#mainHP{
+    position: absolute;
+    font-size: 50px;
+    margin-left: 900px;
+    margin-bottom: 120px;
+}
+#mainPhase {
+    position: absolute;
+    font-size: 20px;
+    margin-left: 535px;
+    margin-bottom: 63px;
+    padding: 2px; /* Optional: add padding for better appearance */
+    border: 2px solid #333; /* Adjust the color and thickness as needed */
+    border-radius: 5px; /* Optional: add border-radius for rounded corners */
+    background-color: #648ac4; /* Optional: add background color for better visibility */
+}
+#confirmAttackMenu {
+    position: absolute;
+    height: 200px;
+    width: 500px;
+    background-color: #333;
+    border: 1px solid black;  
+    z-index: 1;
+    
+}
+#yesConfirmAttack {
+    position: absolute;
+    height: 50px;
+    width: 100px;
+    margin-right: 300px;
+    z-index: 1;
+
+}
+#noConfirmAttack {
+    position: absolute;
+    height: 50px;
+    width: 100px;
+    margin-left: 300px;
+    z-index: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
