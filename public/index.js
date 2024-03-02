@@ -528,57 +528,141 @@ let cardInPlay = null;
 
 let playPhase = false;
 
-function handleSummonButtonClick(slot) {
-    if(totalCardsInPlay >= selectedCard.rank){
-            console.log(totalCardsInPlay, selectedCard.rank);
-    
-        choosingSpot = true;
+let postPhase = false;
 
-        console.log("choosingSpot: " + choosingSpot);
-        console.log(selectedCard);
-        if(selectedCard.rank >= 1){
-            paySummonCost(selectedCard);
+let yesEnterPostPhase = document.getElementById('yesConfirmPostPhase');
+let noEnterPostPhase = document.getElementById('noConfirmPostPhase');
+
+yesEnterPostPhase.addEventListener('click', () => {
+    
+    phase = document.getElementById('mainPhase');
+    midText = document.getElementById('turn-system');
+    console.log("yes clicked");
+
+    postPhase = true;
+    attackPhase = false;
+    attackTargeting = false;
+
+    console.log("postPhase: ", postPhase, "playPhase: ", playPhase, "attackPhase: ", attackPhase, "attackTargeting: ", attackTargeting);
+
+    menu = document.getElementById('confirmAttackMenu');
+    menu.style.display = 'none';
+    yesEnterPostPhase.style.display = 'none';
+    noEnterPostPhase.style.display = 'none';
+
+    
+    phase.textContent = "POST PHASE";
+    phase.style.backgroundColor = 'grey';
+
+    midText.style.display = 'none';
+
+})
+noEnterPostPhase.addEventListener('click', () => {
+    console.log("no clicked");
+})
+
+let usedFirst0Summon = false;
+
+function handleSummonButtonClick(slot) {
+
+    if(attackPhase == true){
+        menu = document.getElementById('confirmAttackMenu');
+        yes = document.getElementById('yesConfirmPostPhase');
+        no = document.getElementById('noConfirmPostPhase');
+
+        menu.textContent = "COMMIT TO POST PHASE? (You won't be able to attack.)";
+        menu.style.display = 'block';
+        yes.style.display = 'block';
+        no.style.display = 'block';
+    }
+
+    
+
+    if (totalCardsInPlay >= selectedCard.rank) {
+        console.log(selectedCard, totalCardsInPlay);
+        
+        if (selectedCard.rank === 0) {
+            if (usedFirst0Summon === false) {
+                console.log("Good to summon 0 cost");
+    
+                console.log(totalCardsInPlay, selectedCard.rank);
+    
+                choosingSpot = true;
+    
+                console.log("choosingSpot: " + choosingSpot);
+                console.log(selectedCard);
+    
+                if (selectedCard && slot) {
+                    // Add logic to handle the summon button click
+                    console.log('SUMMON button clicked for card:', selectedCard);
+    
+                    // Assign the entire selectedCard object to the data-card-inplay attribute
+                    cardInPlay = JSON.stringify(selectedCard);
+                    console.log("cardInPlay: " + cardInPlay);
+    
+                    // Remove the SUMMON button
+                    if (summonButton) {
+                        document.body.removeChild(summonButton);
+                        summonButton = null;
+                    }
+                }
+            } else {
+                console.log("Already used 0 cost summon this turn.");
+
+                midText = document.getElementById('turn-system');
+
+                
+                midText.textContent = "ALREADY USED 0 COST SUMMON";
+                midText.style.opacity = '1';
+                midText.style.display = 'block';
+
+                // Start the fade-out effect after 3 seconds
+                setTimeout(function () {
+            
+                // Use a transition for a smooth fade-out effect
+                midText.style.transition = 'opacity 2s'; // Adjust the duration as needed
+
+                // Set the opacity to 0 to trigger the fade-out
+                midText.style.opacity = '0';
+}, 3000); // Wait for 3 seconds before starting the fade-out effect
+
+
+
+                if (summonButton) {
+                    document.body.removeChild(summonButton);
+                    summonButton = null;
+                }
             }
-        if (selectedCard && slot) {
-                // Add logic to handle the summon button click
-                console.log('SUMMON button clicked for card:', selectedCard);
-    
-                // Assign the entire selectedCard object to the data-card-inplay attribute
-                cardInPlay = JSON.stringify(selectedCard);
-                console.log("cardInPlay: " + cardInPlay);
-            
-            
-    
-            // Remove the SUMMON button
+        } else if (selectedCard.rank >= 1) {
+            paySummonCost(selectedCard);
+
             if (summonButton) {
                 document.body.removeChild(summonButton);
                 summonButton = null;
             }
-            }
-        }else{
-            console.log("not enough cards in play");
+        }
+    } else {
+        console.log("not enough cards in play");
     
-            // Assuming you have a reference to the element already
+        // Assuming you have a reference to the element already
+        var turnSystemElement = document.getElementById('turn-system');
     
-            var turnSystemElement = document.getElementById("turn-system");
+        turnSystemElement.style.display = 'block';
     
-    turnSystemElement.style.display = 'block';
+        // Change the text content of the <p> element
+        turnSystemElement.textContent = "NOT ENOUGH CARDS IN PLAY";
     
-    // Change the text content of the <p> element
-    turnSystemElement.textContent = "NOT ENOUGH CARDS IN PLAY";
+        // Start the fade-out effect by setting opacity to 0
+        turnSystemElement.style.opacity = '0';
     
-    // Start the fade-out effect by setting opacity to 0
-    turnSystemElement.style.opacity = '0';
-    
-    // Use setTimeout to wait for the fade-out effect to finish
-    setTimeout(function () {
-        // Now that the element is invisible, set display to 'none'
-        turnSystemElement.style.display = 'none';
-    }, 5000); // The duration here should match the CSS transition duration
-    
-    
+        // Use setTimeout to wait for the fade-out effect to finish
+        setTimeout(function () {
+            // Now that the element is invisible, set display to 'none'
+            turnSystemElement.style.display = 'none';
+        }, 5000); // The duration here should match the CSS transition duration
     }
 }
+    
 
             
 
@@ -1568,6 +1652,7 @@ function coinFlipFirstAction() {
 }
 
 let attackTargeting = false;
+let attackPhase = false;
 
 let atkMenu = document.getElementById("confirmAttackMenu");
 let atkMenuYes = document.getElementById("yesConfirmAttack");
@@ -1578,6 +1663,8 @@ atkMenuYes.addEventListener('click', function() {
     console.log("Yes pressed");
 
     playPhase = false;
+    attackPhase = true;
+    console.log("attackPhase: ", attackPhase, "playPhase: ", playPhase);
 
     atkMenu.style.display = "none";
     atkMenuYes.style.display = "none";
@@ -1586,6 +1673,10 @@ atkMenuYes.addEventListener('click', function() {
     phase.style.backgroundColor = "red";
 
     attackTargeting = true;
+
+    centerText = document.getElementById("turn-system");
+    centerText.style.display = "block";
+    centerText.textContent = "SELECT ATTACK TARGET";
 
         console.log("Attack button works AFTER MENU CONFIRMATION", "ATTACK TARGET MODE : ", attackTargeting);
 
@@ -1597,6 +1688,14 @@ atkMenuYes.addEventListener('click', function() {
 
 });
 
+atkMenuNo.addEventListener('click', function() {
+    console.log("No pressed");
+
+    atkMenu.style.display = "none";
+    atkMenuYes.style.display = "none";
+    atkMenuNo.style.display = "none";
+})
+
 // Attack button
 function handleAttackButtonClick(slot) {
     if(playPhase == true) {
@@ -1604,6 +1703,8 @@ function handleAttackButtonClick(slot) {
         atkMenu.style.display = "block";
         atkMenuYes.style.display = "block";
         atkMenuNo.style.display = "block";
+
+        document.body.removeChild(attackButton);
         
     }else{
 
@@ -1616,6 +1717,7 @@ function handleAttackButtonClick(slot) {
         attackButton = null;
         }
     }
+    console.log("ATTACK TARGET MODE : ", attackTargeting);
     
 }
 function handleConfirmAttackButtonClick(event) {
@@ -1723,6 +1825,8 @@ function handleBoardSpotClick(event) {
         cardDescTextOnClick.appendChild(descParagraph);
 
         if(event.currentTarget.getAttribute('data-card-inplay') != null && chooseSlot == false && choosingSummonCost == false) {
+
+            console.log(attackButton);
            if (!attackButton) {
             attackButton = document.createElement('button');
             attackButton.textContent = "ATTACK";
@@ -1732,6 +1836,7 @@ function handleBoardSpotClick(event) {
             attackButton.style.position = "fixed";
             attackButton.style.left = event.clientX + "px";
             attackButton.style.top = event.clientY + "px"; 
+            
             }
             atkBtnRemove = true;
         
@@ -1760,9 +1865,6 @@ function handleBoardSpotClick(event) {
         chosenBoardSpot = clickedBoardSpot;
         chosenBoardSpot.appendChild(cardImage);
 
-        // ...
-
-        // ...
 
         const parentElement = document.querySelector(".main-player-hand");
         parentID = parentElement.id;
@@ -1781,6 +1883,10 @@ function handleBoardSpotClick(event) {
 
 
         choosingSpot = false;
+        if(assignCard.rank == 0){
+            usedFirst0Summon = true;
+            console.log("usedFirst0Summon set to false: " + usedFirst0Summon);
+        }
         totalCardsInPlay++;
         console.log("totalCardsInPlay: " + totalCardsInPlay);
         console.log("choosingSpot: " + choosingSpot);
@@ -2008,6 +2114,13 @@ function handleBoardSpotClick(event) {
         }
     }
     if (chooseSlot == true && event.currentTarget != null && choosingSummonCost == false) {
+        console.log(slotIDForRemoval);
+        slotRemove = document.getElementById(slotIDForRemoval);
+        parent = document.querySelector(".main-player-hand");
+
+        parent.removeChild(slotRemove);
+
+
         taken = event.currentTarget.getAttribute('data-card-inplay');
         
         if(taken == null || taken == "null"){
@@ -2487,7 +2600,50 @@ document.getElementById('replace-hand-done').addEventListener('click', function 
 
     turn = document.getElementById('turn-system');
     turn.style.display = 'none';
+
+    endTurn = document.getElementById('endTurn');
+    endTurn.style.display = 'block';
+
+
 });
+
+let endTurnButton = document.getElementById('endTurn');
+let isEnemyTurn = false;
+
+endTurnButton.addEventListener('click', function () {
+    console.log("END TURN button clicked");
+
+    isEnemyTurn = true;
+
+    endTurnButton.textContent = '';
+    endTurnButton.style.backgroundColor = 'rgb(43, 36, 36)';
+    endTurnButton.style.opacity = 0;
+
+    // Set new background properties with a slower animation duration (e.g., 10s)
+    endTurnButton.style.background = "rgba(0, 0, 0, 0.1) url('effects/magic-stars.gif') center center no-repeat";
+    endTurnButton.style.backgroundSize = "cover";
+    endTurnButton.style.animation = "slowBackground 10s infinite linear"; // Adjust the duration as needed
+
+    // Trigger reflow before transitioning to ensure the fade-in effect
+    endTurnButton.offsetWidth;
+
+    // Fade in the button by setting opacity to 1 with a longer duration (e.g., 1.5s)
+    endTurnButton.style.transition = "opacity 1.5s";
+    endTurnButton.style.opacity = 1;
+
+    changePhase = document.getElementById('mainPhase');
+
+    changePhase.textContent = 'ENEMY TURN';
+    changePhase.style.backgroundColor = '#662c2c';
+});
+
+
+
+
+
+
+
+
     
 
 
