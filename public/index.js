@@ -38,7 +38,8 @@ var card = {
     img: "",
     rank: 1,
     desc: "null",
-    currentHealth: null
+    currentHealth: null,
+    trait: "null"
 };
 
 var tinyKnight = Object.assign({}, card, {
@@ -84,6 +85,7 @@ var kenonoForceOfBear = Object.assign({}, card, {
     health: 5,
     img: "card-images/Kenono_Force_Of_Bear.png",
     rank: 2,
+    trait: "TROOP",
     desc: "Whenever this card is in a Attack: Decrease the Attack of the Enemy card in battle with this card by 1 for EACH ANIMAL troop on your side of the field for the rest of this turn."
 })
 
@@ -93,6 +95,7 @@ var alchemApprentice = Object.assign({}, card, {
     health: 4,
     img: "card-images/Alchem_Apprentice.png",
     rank: 1,
+    trait: "TROOP",
     desc: "Once per turn, target an Enemy troop: Add 1 Poison token to it. At the end of your turn, inflict damage to all Enemy cards with Poison tokens equal to the total number of Poison tokens on that card."
 })
 
@@ -102,14 +105,18 @@ var gardenDweller = Object.assign({}, card, {
     health: 3,
     img: "card-images/Garden_Dweller.png",
     rank: 1,
-    desc: "Increase this card's attack and health by 1 for each PLANT card on your side of the field."
+    desc: "Increase this card's attack and health by 1 for each PLANT card on your side of the field.",
+    trait: ["PLANT", "TROOP"],
+    defaultHP: 3,
+    defaultATK: 2
 })
 
 var oneWithNature = Object.assign({}, card, {
     name: "One With Nature",
     img: "card-images/One_With_Nature.png",
     rank: 0,
-    desc: "Target any card on the field: Increase its Health by 2. If the target card is a PLANT card, increase its Attack by 2 as well."
+    desc: "Target any card on the field: Increase its Health by 2. If the target card is a PLANT card, increase its Attack by 2 as well.",
+    trait: ["PLANT", "SPELL"]
 })
 
 var deathIsNotTheEnd = Object.assign({}, card, {
@@ -125,6 +132,7 @@ var kanGrandWatcherOfPeace = Object.assign({}, card, {
     health: 6,
     img: "card-images/Kan_Grand_Watcher_Of_Peace.png",
     rank: 2,
+    trait: "TROOP",
     desc: "Whenever a friendly Troop is in a Attack, temporarily increase its Health by 4 for that Attack only."
 })
 
@@ -149,7 +157,8 @@ var tricksterNibbler = Object.assign({}, card, {
     health: 1,
     img: "card-images/Survival_Instincts.png",
     rank: 0,
-    desc: "On Summon: You may target a friendly PLANT troop: Destroy it, give this card 3 Attack and 3 Health."
+    desc: "On Summon: You may target a friendly PLANT troop: Destroy it, give this card 3 Attack and 3 Health.",
+    trait: ["PLANT", "TROOP"]
 })
 
 var antoniPrideFang = Object.assign({}, card, {
@@ -158,6 +167,7 @@ var antoniPrideFang = Object.assign({}, card, {
     health: 5,
     img: "card-images/Antoni_Pride_Fang.png",
     rank: 2,
+    trait: "TROOP",
     desc: "Whenever you summon a ANIMAL troop, increase this card's Attack and Health by 1."
 })
 
@@ -167,6 +177,7 @@ var renarkStrengthOfTheProtector = Object.assign({}, card, {
     health: 6,
     img: "card-images/Renark_Strength_Of_The_Protector.png",
     rank: 1,
+    trait: "TROOP",
     desc: "Your other friendly ANIMAL troops (except this card) cannot be targeted by Enemy troops for Attacks while this card is on the field."
 
 })
@@ -177,6 +188,7 @@ var wutonkCourageBorn = Object.assign({}, card, {
     health: 2,
     img: "card-images/Wutonk_Courage_Born.png",
     rank: 0,
+    trait: "TROOP",
     desc: "On Summon: You may target a friendly ANIMAL troop except this card: Increase its Attack and Health by 1."
 })
 
@@ -186,6 +198,7 @@ var pawnOfEvil = Object.assign({}, card, {
     health: 1,
     img: "card-images/Pawn_Of_Evil.png",
     rank: 0,
+    trait: "TROOP",
     desc: "If this troop is sent to the graveyard for the summoning of a EVIL troop, return it to your hand."
 })
 
@@ -202,6 +215,7 @@ var sirMoti = Object.assign({}, card, {
     health: 4,
     img: "card-images/Sir_Moti.png",
     rank: 1,
+    trait: "TROOP",
     desc: "Once per turn: You may target any other friendly troop other than this card, heal it by 2. If the friendly troop selected was already at full health, increase its Attack by 2 instead."
 })
 
@@ -211,6 +225,7 @@ var companionOfEvil = Object.assign({}, card, {
     health: 4,
     img: "card-images/Companion_Of_Evil.png",
     rank: 1,
+    trait: "TROOP",
     desc: "If you have another EVIL troop on your field, increase this card's Attack by 1 and Health by 2."
 })
 
@@ -220,6 +235,7 @@ var fauvGiyuo = Object.assign({}, card, {
     health: 5,
     img: "card-images/Fauv_&_Giyuo.png",
     rank: 2,
+    trait: "TROOP",
     desc: "Whenever this card destroys an Enemy troop in a Attack, you may choose one of two effects: 1. Draw a card. 2. Target a friendly troop, increase its Attack and Health by 2."
 })
 
@@ -230,6 +246,7 @@ var motherTelona = Object.assign({}, card, {
     health: 6,
     img: "card-images/Mother_Telona.png",
     rank: 2,
+    trait: "TROOP",
     desc: "Grant +2 Attack and +2 Health to all friendly troops on the field. Decrease all Enemy troop's Attack and Health by 1."
 })
 
@@ -246,6 +263,7 @@ var planetHunter = Object.assign({}, card, {
     health: 2,
     img: "card-images/Planet_Hunter.png",
     rank: 0,
+    trait: "TROOP",
     desc: "When this card is destroyed in an Attack, draw 1 card."
 })
 
@@ -255,6 +273,7 @@ var rescueTeam26TheDirtRollers = Object.assign({}, card, {
     health: 2,
     img: "card-images/Rescue_Team_26_The_DirtRollers.png",
     rank: 3,
+    trait: "TROOP",
     desc: "On Summon: Summon 2 RANK 1 copies of this card."
 })
 
@@ -264,6 +283,7 @@ var rescueTeam14TheLlamageddon = Object.assign({}, card, {
     health: 4,
     img: "card-images/Rescue_Team_14_The_Llamanators.png",
     rank: 2,
+    trait: "TROOP",
     desc: "On Summon: Target any Enemy, deal 6 damage to it."
 })
 
@@ -273,6 +293,7 @@ var Melani = Object.assign({}, card, {
     health: 3,
     img: "card-images/Melani.png",
     rank: 1,
+    trait: "TROOP",
     desc: "On Summon: You may target a troop in your hand. Grant it +2 Attack and +2 Health."
 })
 
@@ -289,6 +310,7 @@ var melanisStudent = Object.assign({}, card, {
     health: 3,
     img: "card-images/Melanis_Student.png",
     rank: 0,
+    trait: "TROOP",
     desc: "Whenever you summon a troop, grant it +2 Health."
 })
 
@@ -307,6 +329,7 @@ var pyroMagician = Object.assign({}, card, {
     health: 2,
     img: "card-images/Pyro_Magician.png",
     rank: 0,
+    trait: "TROOP",
     desc: "On Summon: Draw a random spell from your deck. If the drawn spell is a PYRO spell, increase this card's Attack by 2."
 })
 
@@ -316,6 +339,7 @@ var pyroEvilWield = Object.assign({}, card, {
     health: 2,
     img: "card-images/Pyro_EvilWield.png",
     rank: 1,
+    trait: "TROOP",
     desc: "Once per turn: Target an Enemy troop, deal 4 damage to it. At the end of your turn, choose one of 2 effects: 1. Deal 4 damage to the player controlling this card. 2. Destroy this card."
 })
 
@@ -325,6 +349,7 @@ var alchemKidRogue = Object.assign({}, card, {
     health: 3,
     img: "card-images/Alchem_KidRogue.png",
     rank: 0,
+    trait: "TROOP",
     desc: "Whenever this card has attacked an Enemy troop: Place a Poison token on the attacked troop. At the end of your turn, deal 1 damage to each Enemy troop with at least 1 Poison token on it."
 })
 
@@ -348,6 +373,7 @@ var gemnaDragon = Object.assign({}, card, {
     health: 7,
     img: "card-images/Gemna_Dragon.png",
     rank: 2,
+    trait: ["DRAGON", "TROOP"],
     desc: "On Summon: Draw a random DRAGON card from your deck."
 })
 
@@ -357,6 +383,7 @@ var drakingKnight = Object.assign({}, card, {
     health: 5,
     img: "card-images/Draking_Knight.png",
     rank: 1,
+    trait: "TROOP",
     desc: ""
 })
 
@@ -366,6 +393,7 @@ var venerableBeastMan = Object.assign({}, card, {
     health: 5,
     img: "card-images/BeastMan.png",
     rank: 1,
+    trait: "TROOP",
     desc: "Whenever a friendly ANIMAL card is sent to the graveyard: Increase this card's Attack and Health by 1."
 
 })
@@ -376,6 +404,7 @@ var rescueGeneralZeth = Object.assign({}, card, {
     health: 5,
     img: "card-images/Rescue_General_Zeth.png",
     rank: 2,
+    trait: "TROOP",
     desc: "On Summon: Target a RANK 1 or lower card in your graveyard, summon it to your field."
 })
 
@@ -385,7 +414,8 @@ var gentleForestGrubber = Object.assign({}, card, {
     health: 3,
     img: "card-images/Gentle_Forest_Martyr.png",
     rank: 0,
-    desc: "This card gains +1 Health for each friendly PLANT card on your field."
+    desc: "This card gains +1 Health for each friendly PLANT card on your field.",
+    trait: ["PLANT", "TROOP"]
 })
 
 var babyFurphant = Object.assign({}, card, {
@@ -394,6 +424,7 @@ var babyFurphant = Object.assign({}, card, {
     health: 4,
     img: "card-images/Baby_Furphant.png",
     rank: 0,
+    trait: "TROOP",
     desc: "BEAST."
 })
 
@@ -403,6 +434,7 @@ var babySlime = Object.assign({}, card, {
     health: 2,
     img: "card-images/Baby_Slime.png",
     rank: 0,
+    trait: "TROOP",
     desc: "If you control another SLIME troop on your field other than this card, increase this card's Attack and Health by 2."
 })
 
@@ -412,6 +444,7 @@ var slimeGrubber = Object.assign({}, card, {
     health: 3,
     img: "card-images/Slime_Grubber.png",
     rank: 0,
+    trait: "TROOP",
     desc: "On Summon: Choose one of 2 effects: 1. Draw a random SLIME troop from your deck. 2. Draw a random SLIME spell from your deck."
 })
 
@@ -428,6 +461,7 @@ var slimeDungeonNightmare = Object.assign({}, card, {
     health: 5,
     img: "card-images/Slime_Dungeon_Nightmare.png",
     rank: 1,
+    trait: "TROOP",
     desc: "On Summon: You may target up to 2 Enemy troops, reduce their Attack and Health by half."
 })
 
@@ -437,6 +471,7 @@ var terrorMegaSlime = Object.assign({}, card, {
     health: 7,
     img: "card-images/Terror_Mega_Slime.png",
     rank: 2,
+    trait: "TROOP",
     desc: "On Summon: Grant all friendly SLIME troops on the field +2 Attack."
 })
 
@@ -446,6 +481,7 @@ var heavySlimeGuardian = Object.assign({}, card, {
     health: 6,
     img: "card-images/Heavy_Slime_Guardian.png",
     rank: 1,
+    trait: "TROOP",
     desc: "Your other Friendly SLIME troops on the field have +1 Health. Your other Friendly SLIME troops on the field cannot be targeted by Attacks."
 })
 
@@ -455,6 +491,7 @@ var maestroArenaChampion = Object.assign({}, card, {
     health: 4,
     img: "card-images/Maestro_Arena_Champion.png",
     rank: 1,
+    trait: "TROOP",
     desc: "Whenever this card defeats an Enemy by Attack: Increase this card's Attack and Health by 2."
 })
 
@@ -464,6 +501,7 @@ var maestroProdigySword = Object.assign({}, card, {
     health: 2,
     img: "card-images/Maestro_ProdigySword.png",
     rank: 0,
+    trait: "TROOP",
     desc: "Whenever this card attacks: Draw 1 card."
 
 
@@ -475,6 +513,7 @@ var bendAlchemBlades = Object.assign({}, card, {
     health: 4,
     img: "card-images/Bend_Poison_Blades.png",
     rank: 1,
+    trait: "TROOP",
     desc: "This card gains +1 Attack and +1 Health for each Poison token on the field."
 })
 
@@ -542,6 +581,7 @@ var soraBattleReady = Object.assign({}, card, {
     health: 2,
     img: "card-images/Sora_BattleReady.png",
     rank: 0,
+    trait: "TROOP",
     desc: "On Summon: Draw a random EQUIPMENT card. This card gains +1 Attack for each friendly EQUIPMENT card EQUIPPED to this card."
 })
 
@@ -551,6 +591,7 @@ var bendBladeRogue = Object.assign({}, card, {
     health: 3,
     img: "card-images/Bend_Blade_Rogue.png",
     rank: 1,
+    trait: "TROOP",
     desc: "This card gains +1 Attack and +1 Health for each friendly EQUIPMENT card on the field. Whenever this card attacks: Draw a random EQUIPMENT card."
 })
 
@@ -575,6 +616,7 @@ var alchemArtYinoa = Object.assign({}, card, {
     health: 6,
     img: "card-images/Alchem_Art_Yinoa.png",
     rank: 2,
+    trait: "TROOP",
     desc: "Once per turn: If this card has an EQUIPMENT card EQUIPPED to it, you may place a Poison token on every Enemy troop on the field. At the end of your turn, deal damage to the Enemy Player's health equal to the total number of Poison tokens on the field."
 })
 
@@ -593,6 +635,7 @@ var soulFromTheBeginningOfEvil = Object.assign({}, card, {
     health: 1,
     img: "card-images/Soul_from_the_Beginning_of_Evil.png",
     rank: 0,
+    trait: "TROOP",
     desc: "Gain +1 Attack and +1 Health for each Friendly troop in your Graveyard."
 })
 
@@ -609,6 +652,7 @@ var inkArtSoni = Object.assign({}, card, {
     health: 3,
     img: "card-images/Ink_Art_Soni.png",
     rank: 0,
+    trait: "TROOP",
     desc: "If you control a HIDDEN card on your field: Increase this card's Attack and Health by 1."
 
 })
@@ -619,6 +663,7 @@ var inkArtLyon = Object.assign({}, card, {
     health: 3,
     img: "card-images/Ink_Art_Lyon.png",
     rank: 0,
+    trait: "TROOP",
     desc: "On Summon: You may target a Enemy HIDDEN card: Destroy it, and if you do, draw 1 card."
 })
 
@@ -628,6 +673,7 @@ var inkArtEsmee = Object.assign({}, card, {
     health: 5,
     img: "card-images/Ink_Art_Esmee.png",
     rank: 2,
+    trait: "TROOP",
     desc: "Negate all Enemy HIDDEN card effects."
 })
 
@@ -646,6 +692,7 @@ var masterInkStyleMaySun = Object.assign({}, card, {
     health: 7,
     img: "card-images/Master_Ink_Style_MaySun.png",
     rank: 2,
+    trait: "TROOP",
     desc: "On Summon: Draw 2 random spells from your deck."
 })
 
@@ -655,6 +702,7 @@ var eliteInkArtBaus = Object.assign({}, card, {
     health: 4,
     img: "card-images/Elite_Ink_Art_Baus.png",
     rank: 1,
+    trait: "TROOP",
     desc: "On Summon: Draw 2 random troops from your deck."
 
 })
@@ -672,7 +720,8 @@ var gardenKnightSpirit = Object.assign({}, card, {
     health: 5,
     img: "card-images/Garden_KnightSpirit.png",
     rank: 1,
-    desc: "On Summon: Draw a random PLANT card. All Friendly PLANT cards on the field except this card gain +1 Attack and +1 Health."
+    desc: "On Summon: Draw a random PLANT card. All Friendly PLANT cards on the field except this card gain +1 Attack and +1 Health.",
+    trait: ["PLANT", "TROOP"]
 })
 
 var toughGardenSentinel = Object.assign({}, card, {
@@ -681,7 +730,8 @@ var toughGardenSentinel = Object.assign({}, card, {
     health: 8,
     img: "card-images/Tough_Garden_Sentinel.png",
     rank: 2,
-    desc: "When this card Attacks: Gain +1 Attack and +1 Health for each friendly PLANT card on the field for that Attack only. When this card destroys an Enemy troop by Attack: Draw a random PLANT card from your deck."
+    desc: "When this card Attacks: Gain +1 Attack and +1 Health for each friendly PLANT card on the field for that Attack only. When this card destroys an Enemy troop by Attack: Draw a random PLANT card from your deck.",
+    trait: ["PLANT", "TROOP"]
 })
 
 var gardenCharger = Object.assign({}, card, {
@@ -690,7 +740,8 @@ var gardenCharger = Object.assign({}, card, {
     health: 1,
     img: "card-images/Garden_Charger.png",
     rank: 0,
-    desc: "When this card destroys an Enemy troop: Draw a card."
+    desc: "When this card destroys an Enemy troop: Draw a card.",
+    trait: ["PLANT", "TROOP"]
 })
 
 var gladiatorWindChillWolf = Object.assign({}, card, {
@@ -699,6 +750,7 @@ var gladiatorWindChillWolf = Object.assign({}, card, {
     health: 4,
     img: "card-images/WindChill_Wolf.png",
     rank: 1,
+    trait: "TROOP",
     desc: "On Summon while you control a ANIMAL card on the field other than this card: Search your deck for a ANIMAL card, and add it to your hand. When this card targets an Enemy troop for an Attack while controlling a ANIMAL card on the field other than this card: Reduce the Attack of the Enemy target by 3."
 
 })
@@ -709,6 +761,7 @@ var legacyWindChillWolf = Object.assign({}, card, {
     health: 3,
     img: "card-images/Legacy_WindChill_Wolf.png",
     rank: 0,
+    trait: "TROOP",
     desc: "Once per turn, if a friendly ANIMAL troop is destroyed: Draw a card."
 })
 
@@ -718,6 +771,7 @@ var harvesterWindChillWolf = Object.assign({}, card, {
     health: 3,
     img: "card-images/Harvester_WindChill_Wolf.png",
     rank: 0,
+    trait: "TROOP",
     desc: "On Summon: Target a friendly ANIMAL troop, destroy it, then search your deck for a card, and add it to your hand."
 })
 
@@ -727,6 +781,7 @@ var rogueWindChillWolf = Object.assign({}, card, {
     health: 3,
     img: "card-images/Rogue_WindChill_Wolf.png",
     rank: 0,
+    trait: "TROOP",
     desc: "If this is the only troop on your field: Gain +2 Attack and +2 Health."
 })
 
@@ -753,6 +808,7 @@ var evilPrinceSeba = Object.assign({}, card, {
     health: 6,
     img: "card-images/Evil_Prince_Seba.png",
     rank: 2,
+    trait: "TROOP",
     desc: "On Summon: Choose an Enemy troop: Destroy it, and if you do, you may search your deck for an EVIL card, and add it to your hand."
     
 })
@@ -763,6 +819,7 @@ var zealousSeba = Object.assign({}, card, {
     health: 10,
     img: "card-images/Zealous_Seba.png",
     rank: 5,
+    trait: "TROOP",
     desc: 'You may also use "EvilPrince: Seba" as the sole Sacrifice for the Summoning of this card. After this card Attacks: Destroy this card. This card cannot be used as a Sacrifice for any Summoning.'
 })
 
@@ -820,6 +877,7 @@ var evilMountainRogue = Object.assign({}, card, {
     health: 5,
     img: "card-images/Evil_MountainRogue.png",
     rank: 1,
+    trait: "TROOP",
     desc: "Once per turn, When this card targets an Enemy troop for an Attack, and if the Enemy has a STRUCTURE card on their field: Double this card's stats until the end of the Attack."
 })
 
@@ -836,6 +894,7 @@ var evilRampageBullKing = Object.assign({}, card, {
     health: 3,
     img: "card-images/Evil_Rampage_BullKing.png",
     rank: 1,
+    trait: "TROOP",
     desc: "If this card destroys an Enemy troop by Attack: Ignore any damage taken from the Attack, and restore this card to full Health."
 })
 
@@ -852,6 +911,7 @@ var cyberMechSkyHunter = Object.assign({}, card, {
     health: 4,
     img: "card-images/CyberMech_SkyHunter.png",
     rank: 1,
+    trait: "TROOP",
     desc: "When a Friendly troop is destroyed while this card is in your hand: Summon this card."
 
 
@@ -863,6 +923,7 @@ var aquaEndDragon = Object.assign({}, card, {
     health: 6,
     img: "card-images/Aqua_End_Dragon.png",
     rank: 2,
+    trait: "TROOP",
     desc: "On Summon: Return all Enemy cards on the Enemy field to their owner's hand."
 })
 
@@ -879,6 +940,7 @@ var twinAquaDragon = Object.assign({}, card, {
     health: 4,
     img: "card-images/Twin_Aqua_Dragon.png",
     rank: 2,
+    trait: "TROOP",
     desc: "This card can Attack twice per turn."
 })
 
@@ -902,7 +964,8 @@ var magicMistForest = Object.assign({}, card, {
     health: 5,
     img: "card-images/Magic_Mist_Forest.png",
     rank: 0,
-    desc: "STRUCTURE: Remains on the field until destroyed. Your PLANT cards are unaffected by ALL Enemy spell effects."
+    desc: "STRUCTURE: Remains on the field until destroyed. Your PLANT cards are unaffected by ALL Enemy spell effects.",
+    trait: "PLANT"
 })
 
 var juniorRescueTeamClubFire = Object.assign({}, card, {
@@ -911,6 +974,7 @@ var juniorRescueTeamClubFire = Object.assign({}, card, {
     health: 3,
     img: "card-images/Junior_Rescue_Team_ClubFire.png",
     rank: 1,
+    trait: "TROOP",
     desc: "On Summon: Choose a Rank 0 troop in your hand, summon it."
 })
 
@@ -960,14 +1024,15 @@ var pacificGetaway = Object.assign({}, card, {
     name: '"Pacific Getaway"',
     img: "card-images/Pacific_Getaway.png",
     rank: 0,
-    desc: "Choose a Friendly RANK 1 Troop on your field: Destroy it, then search your Graveyard for a RANK 0 Troop, and Summon it."
+    desc: "Choose a Friendly RANK 1 Troop on your field: Destroy it, search your Graveyard for a RANK 0 Troop, Summon it, then draw 1 card."
 })
 
 var growth = Object.assign({}, card, {
     name: '"Growth"',
     img: "card-images/Growth.png",
     rank: 0,
-    desc: "If you control at least 1 Friendly PLANT troop on the field: Search your deck for a PLANT card, add it to your hand, then shuffle your deck."
+    desc: "If you control at least 1 Friendly PLANT troop on the field: Search your deck for a PLANT card, add it to your hand, then shuffle your deck.",
+    trait: "PLANT"
 })
 
 var evilAlchemAntiHero = Object.assign({}, card, {
@@ -976,6 +1041,7 @@ var evilAlchemAntiHero = Object.assign({}, card, {
     health: 6,
     img: "card-images/Evil_Alchem_AntiHero.png",
     rank: 1,
+    trait: "TROOP",
     desc: "Whenever you place a Poison token on an Enemy Troop: Add 1 Poison token to this card. Once per turn, when an Enemy card Ability is Activated: You may remove 3 Poison tokens from this card, and Cancel that Ability."
 })
 
@@ -994,6 +1060,7 @@ var evilBendBattleMaster = Object.assign({}, card, {
     health: 4,
     img: "card-images/Evil_Bend_BattleMaster.png",
     rank: 1,
+    trait: "TROOP",
     desc: "On Summon: Deal 2 damage to an Enemy. When this card is sent to the Graveyard: Draw a random EVIL card."
 })
 
@@ -1003,6 +1070,7 @@ var midnightDragon = Object.assign({}, card, {
     attack: 2,
     health: 3,
     rank: 0,
+    trait: "TROOP",
     desc: "This card gains +1 Attack and +2 Health during your Enemy's turn."
 })
 
@@ -1115,6 +1183,7 @@ AddToAllCards(evilMountainRogue);
 AddToAllCards(naturalNutrients);
 AddToAllCards(magicMistForest);
 AddToAllCards(aquaEndDragon);
+
 var player1Deck = [];
 console.log(player1Deck);
 
@@ -1398,16 +1467,24 @@ function populateMainPlayerHand() {
                 costBox = document.createElement('div');
                 costBox.className = 'card-cost-box'; // Change id to class
                 costBox.style.position = 'absolute';
-                costBox.style.top = '5px';
-                costBox.style.left = '5px';
-                costBox.style.width = '20px';
-                costBox.style.height = '20px';
-                costBox.style.backgroundColor = 'rgb(42, 204, 245)';
-                costBox.style.color = 'black';
+                costBox.style.top = '-5px';
+                costBox.style.left = '-5px';
+                costBox.style.width = '45px';
+                costBox.style.height = '45px';
+                costBox.style.background = 'url("/effects/costpenta.png") center/cover'; // Set the background
+                costBox.style.color = 'white';
                 costBox.style.display = 'flex';
                 costBox.style.justifyContent = 'center';
                 costBox.style.alignItems = 'center';
                 costBox.style.zIndex = '1';
+                costBox.style.fontSize = '20px';
+                costBox.style.textShadow = '-1.5px -0.8px 0 rgba(0, 0, 0, 1), 0.8px -0.8px 0 rgba(0, 0, 0, 1), -2px 0.8px 0 rgba(0, 0, 0, 1), 0.8px 0.8px 0 rgba(0, 0, 0, 1)';
+            
+            
+            
+            
+
+
 
                 // Add the cost box to the slot
                 slot.appendChild(costBox);
@@ -1461,6 +1538,8 @@ let summonButton = null;
 let selectedCard = null;
 let waitingForSummon = false;
 
+let activateAbilityButton = null;
+
 let mainboard1Occupied = false;
 let mainboard2Occupied = false;
 let mainboard3Occupied = false;
@@ -1480,7 +1559,7 @@ function handleSlotClick(event) {
     
     slot = event.currentTarget;
 
-    if (!waitingForSummon && selectingReplacingCards == false) {
+    if (!waitingForSummon && selectingReplacingCards == false && selectSpotForSpellActivation == false) {
         
         id = slot.id;
         slotIDForRemoval = id;
@@ -1515,22 +1594,43 @@ function handleSlotClick(event) {
         descParagraph.textContent = "RANK: " + selectedCard.rank + " ATK: " + selectedCard.attack + " HP: " + selectedCard.health + " " + selectedCard.desc;
         cardDescTextOnClick.appendChild(descParagraph);
 
+        console.log(selectedCard.trait);
+        console.log(summonButton, )
+
         // Create the SUMMON button
-        if (!summonButton && isEnemyTurn == false) {
+        if (!summonButton && !isEnemyTurn && !selectedCard.trait.includes("SPELL")) {
             summonButton = document.createElement('button');
             summonButton.textContent = "SUMMON";
             summonButton.addEventListener('click', () => handleSummonButtonClick(slot));
             document.body.appendChild(summonButton);
-            
-            // Set the button's position to the mouse cursor position
         
+            // Set the button's position to the mouse cursor position
         }
-        summonButton.style.position = "fixed";
-        summonButton.style.left = event.clientX + "px";
-        summonButton.style.top = event.clientY + "px";
+        
+
+        if (!activateAbilityButton && !isEnemyTurn && selectedCard.trait.includes("SPELL")) {
+            activateAbilityButton = document.createElement('button');
+            activateAbilityButton.textContent = "ACTIVATE";
+            activateAbilityButton.addEventListener('click', () => handleActivateAbilityButtonClick(slot));
+            document.body.appendChild(activateAbilityButton);
+        }
+        
 
         
+        if(summonButton && !selectedCard.trait.includes("SPELL")) {
+            summonButton.style.position = "fixed";
+            summonButton.style.left = event.clientX + "px";
+            summonButton.style.top = event.clientY + "px";
+        }
+
+        // Set the button's position to the mouse cursor position
+        if (activateAbilityButton && selectedCard.trait.includes("SPELL")) {
+            activateAbilityButton.style.position = "fixed";
+            activateAbilityButton.style.left = event.clientX + "px";
+            activateAbilityButton.style.top = event.clientY + "px";
+        }
     }
+
     if (selectingReplacingCards == true) {
         
         const willReplaceValue = slot.getAttribute('willReplace') === 'true' ? 'false' : 'true';
@@ -1572,6 +1672,66 @@ function handleSlotClick(event) {
         console.log(willReplaceValue);
     }
 }
+
+let selectSpotForSpellActivation = false;
+let spell = null;
+
+function handleActivateAbilityButtonClick(slot) {
+    console.log("Activate ability button clicked", slot);
+    
+    const card = JSON.parse(slot.getAttribute('data-random-card'));
+    console.log(card);
+
+    switch(card.name){
+        case "One With Nature":
+            console.log("One With Nature detected, checking to make sure it's playable");
+            
+
+            returnAllCardsOnField();
+            console.log("mainPlayerField: ", mainPlayerField);
+
+            for(let i = 0; i < mainPlayerField.length; i++){
+                console.log("mainPlayerField[i]: ", mainPlayerField[i]);
+                cardData = JSON.parse(mainPlayerField[i]);
+                console.log("cardData: ", cardData);
+
+                trait = cardData.trait;
+                console.log("trait: ", trait);
+
+                if(trait == "TROOP"){
+                    console.log("One with Nature is playable");
+                    selectSpotForSpellActivation = true;
+                    
+                }else{
+                    console.log("One with Nature is not playable");
+                    updateCenterText("Card cannot be played here");
+                }
+            }
+            break; // Added missing break statement
+
+        // Add additional cases for other card names if needed
+
+        default:
+            console.log("Unknown card detected");
+            break; // Optional, depending on your logic
+    }
+
+    console.log("selectSpotForSpellActivation: ", selectSpotForSpellActivation);
+
+    spell = card;
+    console.log("spell: ", spell);
+
+    updateCenterText("SELECT SPOT TO PLAY CARD");
+    var turnSystemElement = document.getElementById("turn-system");
+    turnSystemElement.style.display = "block";
+
+    // Check if activateAbilityButton exists before attempting to remove it
+    var activateAbilityButton = document.getElementById("activate-ability-button");
+    if (activateAbilityButton) {
+        activateAbilityButton.parentNode.removeChild(activateAbilityButton);
+    }
+}
+
 
 let cardInPlay = null;
 
@@ -2825,6 +2985,8 @@ function handleConfirmAttackButtonClick(event) {
 let attackButton = null;
 let confirmAttackButton = null;
 
+let abilityButton = null;
+
 // attack targeting logic
 let mainPlayerCard = null;
 let enemyTargetCard = null;
@@ -2833,10 +2995,15 @@ let enemyTarget = null;
 let clickedSlot = null;
 
 let atkBtnRemove = false;
+let abilityBtnRemove = false;
 
 let totalCardsInPlay = 0;
+let cardButtonContainer = null;
 
 let cardInSlot = null;
+
+let selectedBoardSpot = null;
+
 
 // Function to handle the click on the board spot
 function handleBoardSpotClick(event) {
@@ -2846,12 +3013,13 @@ function handleBoardSpotClick(event) {
     console.log("cardInSlot: " + cardInSlot);
     console.log(choosingSpot, event.currentTarget, choosingSummonCost, chooseSlot, cardInSlot);
 
-    if (choosingSpot == false && event.currentTarget != null && attackTargeting == false && chooseSlot == false && choosingSummonCost == false) {
+    if (choosingSpot == false && event.currentTarget != null && attackTargeting == false && chooseSlot == false && choosingSummonCost == false && selectSpotForSpellActivation == false) {
         console.log(choosingSpot, event.currentTarget, choosingSummonCost, chooseSlot, cardInSlot);
         
         const slot = event.currentTarget;
         clickedSlot = slot;
         console.log("clickedSlot: ", clickedSlot);
+        selectedBoardSpot = slot;
         id = slot.id;
         console.log("Selected slot: ", slot);
         console.log("Selected slot id: ", id);
@@ -2863,6 +3031,8 @@ function handleBoardSpotClick(event) {
         // Display the card sprite in the card-information-onclick element
         const cardInformationOnClick = document.getElementById('card-information-onclick');
         cardInformationOnClick.innerHTML = "";
+
+        
     
         if (selectedCard != null) {
             const cardSpriteImage = document.createElement('img');
@@ -2878,30 +3048,102 @@ function handleBoardSpotClick(event) {
     
         // Update the card-desc-text-onclick with the chosen card's desc
         const cardDescTextOnClick = document.getElementById('card-desc-text-onclick');
+        const cardDescName = document.getElementById('card-desc-name');
         cardDescTextOnClick.innerHTML = "";
+        cardDescName.innerHTML = "";
     
         if (selectedCard != null) {
             const descParagraph = document.createElement('p');
+            const descName = document.createElement('p');
+            descName.textContent = selectedCard.name;
             descParagraph.textContent = "RANK: " + selectedCard.rank + " ATK: " + selectedCard.attack + " HP: " + selectedCard.health + " " + selectedCard.desc;
             cardDescTextOnClick.appendChild(descParagraph);
+            cardDescName.appendChild(descName);
         }
     
-        if (selectedCard != null && chooseSlot == false && choosingSummonCost == false) {
+        if (selectedCard != null && chooseSlot == false && choosingSummonCost == false && targetCard == false) {
             console.log(event.currentTarget.getAttribute('data-card-inplay'));
-    
+        
+            // Create container for buttons
+            if (!cardButtonContainer) {
+                cardButtonContainer = document.createElement('div');
+                cardButtonContainer.style.position = "absolute";
+                cardButtonContainer.style.display = "flex"; // Ensures buttons stack vertically
+                cardButtonContainer.style.flexDirection = "column"; // Stack buttons vertically
+                document.body.appendChild(cardButtonContainer);
+            }
+        
+            // Create attack button if not already created
             if (!attackButton) {
                 attackButton = document.createElement('button');
                 attackButton.textContent = "ATTACK";
                 attackButton.addEventListener('click', () => handleAttackButtonClick(slot));
-                document.body.appendChild(attackButton);
+                cardButtonContainer.appendChild(attackButton);
             }
-    
-            attackButton.style.position = "fixed";
-            attackButton.style.left = event.clientX + "px";
-            attackButton.style.top = event.clientY + "px";
+        
+            // Create ability button if not already created
+            if (!abilityButton) {
+                abilityButton = document.createElement('button');
+                abilityButton.textContent = "ABILITY";
+                abilityButton.addEventListener('click', () => handleAbilityButtonClick(slot));
+                cardButtonContainer.appendChild(abilityButton);
+            }
+        
+            // Position button container
+            cardButtonContainer.style.left = event.clientX + "px";
+            cardButtonContainer.style.top = event.clientY + "px";
+        
+            
+            
         }
+        if (selectedCard == null) {
+            console.log("removing buttons");
+            if (abilityBtnRemove == true) {
+                cardButtonContainer.removeChild(abilityButton);
+                abilityButton = null; // Reset the button variable
+            }
+            if (atkBtnRemove == true) {
+                cardButtonContainer.removeChild(attackButton);
+                attackButton = null; // Reset the button variable
+            }
+        }
+        if (targetCard == true){
+            console.log("targetCard: ", selectedCard);
+            console.log("target card slot id is ", id)
+            if(selectedCard != null){
+                console.log("target card: ", selectedCard);
+                switch (cardEffect) {
+                    case "One With Nature":
+                        console.log("One With Nature effect works on target card: ", selectedCard);
+                        selectedCard.currentHealth = selectedCard.health;
+                        selectedCard.currentHealth++;
+                        selectedCard.currentHealth++;
+                        console.log(selectedCard.currentHealth);
+                        selectedCard.currentAttack = selectedCard.attack;
+                        console.log(selectedCard.currentAttack);
+                        updateHPATKUI(selectedCard, clickedSlot);
+
+                        targetCard = false;
+                        console.log("Effect end, sending spell to graveyard");
+                        console.log("slot id is ", slotIDForRemoval, slotId);
+
+                        document.getElementById(slotIDForRemoval).remove();
+                        board = document.getElementById(slotId);
+                        board.style.backgroundImage = '';
+
+                        
+
+                        cardSendGraveyard(oneWithNature);
+
+                        break;
+                    
+                }
+            }
+        }
+        
     
         atkBtnRemove = true;
+        abilityBtnRemove = true;
     }
     
     //regular summoning
@@ -2950,7 +3192,7 @@ function handleBoardSpotClick(event) {
 
         choosingSpot = false;
         if(assignCard.rank == 0){
-            usedFirst0Summon = true;
+            //usedFirst0Summon = true;
             console.log("usedFirst0Summon set to false: " + usedFirst0Summon);
         }
         totalCardsInPlay++;
@@ -2968,9 +3210,10 @@ function handleBoardSpotClick(event) {
             cardAttackBox.style.display = "block";
             cardHealthBox.textContent = assignCard.health;
             cardAttackBox.textContent = assignCard.attack;
-}
+        }
 
-
+        checkForOngoingEffects();
+        selectedBoardSpot = chosenBoardSpot;
 
         socket.emit("playerMove", chosenBoardSpot.id);
 
@@ -3179,6 +3422,8 @@ function handleBoardSpotClick(event) {
             }
         }
     }
+
+    //summoning a card that required a sacrifice targetting
     if (chooseSlot == true && event.currentTarget != null && choosingSummonCost == false) {
         console.log(slotIDForRemoval);
         slotRemove = document.getElementById(slotIDForRemoval);
@@ -3232,6 +3477,19 @@ function handleBoardSpotClick(event) {
             console.log("totalCardsInPlay: " + totalCardsInPlay);
             console.log(slot);
 
+            checkForOngoingEffects();
+            selectedBoardSpot = chosenBoardSpot;
+
+
+            //activating on summon effects when card is summoned
+            switch(assignCard.name){
+                case "Garden Dweller":
+                    console.log("Garden Dweller summoned, ongoing effect activating now");
+                    
+                    activateEffect(gardenDweller);
+                
+            }
+
             
 
 
@@ -3241,6 +3499,7 @@ function handleBoardSpotClick(event) {
             
     
     }
+
     // attack targeting
     if(attackTargeting == true && chosenBoardSpot != null){
 
@@ -3270,6 +3529,7 @@ function handleBoardSpotClick(event) {
         }
         
     }
+
     // choosing summon cost after summon button click if card requires sacrifice(s)
     if (choosingSummonCost == true && event.currentTarget != null) {
         console.log("COST THAT MUST BE PAID IS :", price);
@@ -3320,9 +3580,80 @@ function handleBoardSpotClick(event) {
         }
         
     }
+
+    //select spot to play spell card on
+    if (selectSpotForSpellActivation == true && event.currentTarget != null) {
+        slotId = event.currentTarget.id;
+        console.log("slotId: ", slotId);
+        console.log(event.currentTarget, spell);
+
+        if(slotId == "mainboard-6" || slotId == "mainboard-7" || slotId == "mainboard-8" || slotId == "mainboard-9" || slotId == "mainboard-10"){
+            event.currentTarget.setAttribute("data-card-inplay", JSON.stringify(spell));
+
+            cardInSpot = event.currentTarget.getAttribute("data-card-inplay");
+        
+            console.log("SPOT: ", cardInSpot);
+        
+
+            event.currentTarget.style.backgroundImage = '';
+    
+            // Set the background image and styles for stretching
+            event.currentTarget.style.backgroundImage = `url(${spell.img})`;
+            event.currentTarget.style.backgroundSize = 'cover';
+            event.currentTarget.style.backgroundPosition = 'center';
+            event.currentTarget.style.backgroundRepeat = 'no-repeat';
+    
+            selectSpotForSpellActivation = false;
+
+            updateCenterText("Spell Activated!");
+
+            activateEffect(spell, slotId);
+        }
+        else{
+            console.log("Spells can only be played on the backrow board spots.");
+        }
+
+
+
+
+    }
     
 
         
+}
+
+function checkForOngoingEffects() {
+    console.log("checking for ongoing effects...");
+
+    returnAllCardsOnField();
+
+    for(let i = 0; i < mainPlayerField.length; i++){
+        let a = mainPlayerField[i];
+        console.log("a before parse: ", a);
+        let parsed = JSON.parse(a);
+        
+        let spotId = mainPlayerFieldId[i];
+
+        console.log("parsed: ", parsed);
+        console.log("spotId: ", spotId);
+
+        if(parsed.name == "Garden Dweller"){
+            console.log("found garden dweller for ongoing effect check on summon");
+
+            let found = document.getElementById(spotId).getAttribute("data-card-inplay"); // Retrieve the HTML element by ID and then get its data-card-inplay attribute
+            console.log("found: ", found, spotId);
+            activateEffect(found, spotId);
+        }
+    }
+}
+
+
+
+function handleAbilityButtonClick(slot) {
+    usedCard = selectedCard;
+    console.log("Ability button clicked, card is: ", usedCard);
+
+    activateEffect(usedCard);
 }
 
 let chooseSlot = false;
@@ -3376,10 +3707,19 @@ function updateHPATKUI(card, boardSpot) {
     const healthUI = boardSpot.querySelector('#card-health-box');
     console.log(healthUI);
 
+    const attackUI = boardSpot.querySelector('#card-attack-box');
+    console.log(attackUI);
+
+    
     console.log("card health: ", card.currentHealth);
+    console.log("card attack: ", card.currentAttack);
+    atk = card.currentAttack;
     hp = card.currentHealth;
     healthUI.textContent = hp;
     healthUI.style.display = 'block';
+
+    attackUI.textContent = atk;
+    attackUI.style.display = 'block';
 
     
 
@@ -3834,7 +4174,7 @@ function findFirstEmptySlot() {
 collectionBtn = document.querySelector('#collection');
 collectionMenu = document.querySelector('#collection-list');
 
-
+//main menu open all cards button
 collectionBtn.addEventListener('click', () => {
     console.log("collectionBtn works");
     buttonContainer = document.querySelector('#button-container');
@@ -3895,6 +4235,7 @@ function assignCollectionSlot(card, slot) {
 
 
 collectionExitBtn = document.querySelector('#collection-exit');
+
 // Function to execute when mouse enters .collection-card
 function handleCollectionCardMouseEnter(event) {
     // Add your code here
@@ -3926,17 +4267,146 @@ collectionCards.forEach(function(card) {
     card.addEventListener('mouseleave', handleCollectionCardMouseLeave);
 });
 
-function activateEffect(card) {
+let targetCard = false;
+let cardEffect = null;
 
+function activateEffect(card, id) {
+    console.log("Activate effect works, activating ability for ", card, id);
+    
+    console.log(card.name);
+    
+    if (card.name) {
+        switch (card.name) {
+            case "Garden Dweller":
+                console.log("Garden Dweller works");
+                let atkGain = 0;
+                let healthGain = 0;
+                
+                returnAllCardsOnField();
+                
+                for (let i = 0; i < mainPlayerField.length; i++) {
+                    let a = mainPlayerField[i];
+                    console.log(a, i);
+                    let parsed = JSON.parse(a);
+                    if (parsed.trait == "PLANT") {
+                        console.log("Found a plant", i);
+                        atkGain++;
+                        healthGain++;
+                    }
+                }
+                
+                console.log(atkGain, healthGain);
+                
+                console.log("original card ability used slot:", selectedBoardSpot, id);
+                
+                origCardID = document.getElementById(id);
+                
+                let origCardHP = origCardID.querySelector("#card-health-box");
+                let origCardATK = origCardID.querySelector("#card-attack-box");
+                
+                if (origCardHP && origCardATK) {
+                    origCardHP.innerHTML = gardenDweller.defaultHP + healthGain;
+                    origCardATK.innerHTML = gardenDweller.defaultATK + atkGain;
+                }
+                
+                break;
+            case "One With Nature":
+                console.log("One with Nature works");
+                
+                returnAllCardsOnField();
+                
+                for (let i = 0; i < mainPlayerField.length; i++) {
+                    let a = mainPlayerField[i];
+                    let id = mainPlayerFieldId[i];
+                    parse = JSON.parse(a);
+                    
+                    console.log(a, i, id, parse);
+                    
+                    if (parse.trait == "TROOP") {
+                        console.log("Found a Troop", parse);
+                        targetCard = true;
+                        cardEffect = "One With Nature";
+                        console.log("looking for target on", targetCard, cardEffect);
 
+                        updateCenterText("Select friendly Troop to target");
+                    }
+                }
+                
+                break;
+        }
+    } else {
+        console.log("No card found");
+        parse = JSON.parse(card);
+        console.log(parse);
+        
+        switch (parse.name) {
+            case "Garden Dweller":
+                console.log("Garden Dweller works");
+                let atkGain = 0;
+                let healthGain = 0;
+                
+                returnAllCardsOnField();
+                
+                for (let i = 0; i < mainPlayerField.length; i++) {
+                    let a = mainPlayerField[i];
+                    console.log(a, i);
+                    let parsed = JSON.parse(a);
+                    if (parsed.trait == "PLANT") {
+                        console.log("Found a plant", i);
+                        atkGain++;
+                        healthGain++;
+                    }
+                }
+                
+                console.log(atkGain, healthGain);
+                
+                console.log("original card ability used slot:", id);
+                
+                origCardID = document.getElementById(id);
+                
+                let origCardHP = origCardID.querySelector("#card-health-box");
+                let origCardATK = origCardID.querySelector("#card-attack-box");
+                
+                if (origCardHP && origCardATK) {
+                    origCardHP.innerHTML = gardenDweller.defaultHP + healthGain;
+                    origCardATK.innerHTML = gardenDweller.defaultATK + atkGain;
+                }
+                
+                break;
+            case "One With Nature":
+                console.log("One with Nature works");
+                break;
+        }
+    }
 }
 
+
+
+
+
+
+let enemyField = [];
+let enemyFieldId = [];
+let mainPlayerField = [];
+let mainPlayerFieldId = [];
+
+// Function to return the number of all cards in play on the board
 function returnAllCardsOnField() {
     var enemyBoardSpots = document.querySelectorAll('#player2-board .board-spot');
+
+    enemyField.length = 0;
+    enemyFieldId.length = 0;
+    mainPlayerField.length = 0;
+    mainPlayerFieldId.length = 0;
 
     enemyBoardSpots.forEach(function(boardSpot) {
         var cardInPlay = boardSpot.getAttribute('data-card-inplay');
         console.log('Data-card-inplay for ' + boardSpot.id + ': ' + cardInPlay);
+        if(cardInPlay != null && cardInPlay != 'null'){
+            enemyField.push(cardInPlay);
+            enemyFieldId.push(boardSpot.id);
+            console.log(enemyField, enemyFieldId);
+        }
     });
 
     var playerBoardSpots = document.querySelectorAll('#player1-board .board-spot');
@@ -3944,41 +4414,64 @@ function returnAllCardsOnField() {
     playerBoardSpots.forEach(function(boardSpot) {
         var cardInPlay = boardSpot.getAttribute('data-card-inplay');
         console.log('Data-card-inplay for ' + boardSpot.id + ': ' + cardInPlay);
-    })
+        if(cardInPlay != null && cardInPlay != 'null'){
+            mainPlayerField.push(cardInPlay);
+            mainPlayerFieldId.push(boardSpot.id);
+            console.log(mainPlayerField, mainPlayerFieldId);
+        }
+            
+    });
 }
 
+//test return all cards on board *working fine*
 document.getElementById('testAllCardsOnBoard').addEventListener('click', function() {
     console.log("testAllCardsOnBoard works");
     returnAllCardsOnField();
     
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//add specific card to player deck for testing purpose
+document.getElementById('testBTN').addEventListener('click', function() {
+    console.log("testBTN works");
+    addCardToDeck(oneWithNature);
     
-    
-    
+})
 
+collectionExitBtn.addEventListener('click', function() {
+    console.log("exit collection menu button works");
+
+    collectionMenu.style.display = 'none';
+
+    returnToArenaCardPick();
+
+})
+
+//return to main pick a card menu screen
+function returnToArenaCardPick() {
+    console.log("returnToArenaCardPick works");
+
+    // Assuming these are global variables
+    var buttonContainer = document.querySelector('#button-container');
+    var deckContainer = document.querySelector('#deck-container');
+
+    // Toggle background class on body
+    document.body.classList.toggle("no-background");
+
+    // Set display styles for buttonContainer and deckContainer
+    buttonContainer.style.display = 'flex'; // Use flexbox to make the elements responsive
+    deckContainer.style.display = 'flex'; // Use flexbox to make the elements responsive
+
+    // Additional styles for responsiveness
+    
+    buttonContainer.style.justifyContent = 'center'; // Center items vertically
+    deckContainer.style.justifyContent = 'center'; // Center items vertically
+    
+}
+
+function addCardToDeck(card) {
+    console.log("addCardToDeck works");
+
+    player1Deck.push(card);
+    updatePlayerDeck();
+}
 

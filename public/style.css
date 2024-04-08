@@ -454,21 +454,27 @@ body {
 }
 
 #player2-board {
-    padding-top: 100px;
-    margin-top: 500px;
+    padding-top: 0; /* No padding */
+    margin-top: 143px; /* Decrease margin */
     display: grid;
     grid-template-columns: repeat(5, 1fr); /* 5 columns */
     gap: 15px; /* Adjust the space between individual board spots */
-     
 }
 
 #player1-board {
     display: grid;
     grid-template-columns: repeat(5, 1fr); /* 5 columns */
     gap: 15px; /* Adjust the space between individual board spots */
-    margin-bottom: 440px; /* Adjust the space between the two rows */
-    padding-bottom: 200px;
+    margin-bottom: 183px; /* Decrease margin */
+    padding-bottom: 0; /* No padding */
 }
+
+
+
+
+
+
+
 
 .board-spot {
     position: relative;
@@ -929,6 +935,8 @@ body {
     position: absolute;
     height: 50px;
     width: 100px;
+    margin-left: 850px;
+    margin-bottom: 300px;
 }
 
 
@@ -948,4 +956,3 @@ body {
 
   
   
-
